@@ -1,0 +1,15 @@
+from collections import Counter
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        # s = "AAABABBCCCCA"
+       char_count = Counter()
+       left=0
+       maxfreq=0
+       for right, char in enumerate(s):
+            char_count[char] += 1
+            maxfreq=max(maxfreq,char_count[char])
+
+            if (right - left +1 - maxfreq)>k:
+                char_count[s[left]]-=1
+                left +=1
+       return len(s) - left
